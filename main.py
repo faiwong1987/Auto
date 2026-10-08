@@ -9,7 +9,7 @@ pyautogui.FAILSAFE = True
 
 
 import os
-import PySimpleGUI as sg
+import time
 
 def auto():
     print("position :",pyautogui.position())
@@ -78,12 +78,34 @@ def tkinter_start():
     # 3. Start the event loop
     root.mainloop()
 
+def test_capture():
+    file_path = "test.png"
+    try:
+        location = pyautogui.locateCenterOnScreen(file_path, confidence=0.9)
+        print(location)
+        print(location[0])
+    except pyautogui.ImageNotFoundException:
+        location = False
+        print(location)
+        # print("Image not found on screen.")
+    return location
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm')
-    auto()
+    #auto()
     #pysimplegui_start()
     #tkinter_start()
+    turnon = True
+    while turnon:
+        time.sleep(2)
+        gotit = test_capture()
+        print("gotit :", gotit)
+        if not isinstance(gotit, bool):
+            print("condition met!")
+            turnon = False
+        print(turnon)
+
+    print("finished")
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
