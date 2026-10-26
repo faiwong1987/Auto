@@ -3,16 +3,17 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import pyautogui
-pyautogui.PAUSE = 0.5
+pyautogui.PAUSE = 0.1
 pyautogui.FAILSAFE = True
 #When fail-safe mode is True, moving the mouse to the upper-left will raise a pyautogui.FailSafeException that can abort your program:
 
 
 import os
 import time
+from datetime import datetime
 
 target_games = 0
-total_games = 1
+total_games = 0
 
 def auto():
     print("position :",pyautogui.position())
@@ -84,7 +85,7 @@ def tkinter_start():
 def test_capture():
     file_path = "test.png"
     try:
-        location = pyautogui.locateCenterOnScreen(file_path, confidence=0.9)
+        location = pyautogui.locateCenterOnScreen(file_path, confidence=0.7)
         pyautogui.moveTo(location)
         #location2 = [location[0] + 10, location[1] + 10]
         #pyautogui.dragTo(location2)
@@ -102,7 +103,8 @@ def click_level():
     lvl_pic = "levelup.png"
     try:
         location = pyautogui.locateCenterOnScreen(lvl_pic, confidence=0.9)
-        location2 = [location[0], location[1] + 125]
+        #location2 = [location[0], location[1] + 125] #shacks
+        location2 = [location[0], location[1] + 150] #laptop
         pyautogui.moveTo(location2)
         pyautogui.click()
     except pyautogui.ImageNotFoundException:
@@ -111,8 +113,8 @@ def click_level():
 def elite_click():
     elite_pic = "elite.png"
     try:
-        location = pyautogui.locateCenterOnScreen(elite_pic, confidence=0.9)
-        location2 = [location[0], location[1] + 150]
+        location = pyautogui.locateCenterOnScreen(elite_pic, confidence=0.7)
+        location2 = [location[0], location[1] + 175]
         pyautogui.moveTo(location2)
         pyautogui.click()
     except pyautogui.ImageNotFoundException:
@@ -121,8 +123,8 @@ def elite_click():
 def elite2_click():
     elite_pic2 = "elite2.png"
     try:
-        location = pyautogui.locateCenterOnScreen(elite_pic2, confidence=0.9)
-        location2 = [location[0] - 100, location[1] - 350]
+        location = pyautogui.locateCenterOnScreen(elite_pic2, confidence=0.7)
+        location2 = [location[0] - 200, location[1] - 450]
         pyautogui.moveTo(location2)
         pyautogui.click()
     except pyautogui.ImageNotFoundException:
@@ -131,7 +133,7 @@ def elite2_click():
 def confirm_click():
     confirm_pic = "confirm.png"
     try:
-        location = pyautogui.locateCenterOnScreen(confirm_pic, confidence=0.9)
+        location = pyautogui.locateCenterOnScreen(confirm_pic, confidence=0.7)
         pyautogui.moveTo(location)
         pyautogui.click()
     except pyautogui.ImageNotFoundException:
@@ -141,11 +143,11 @@ def retry_click():
     global total_games
     retry_pic = "retry.png"
     try:
-        location = pyautogui.locateCenterOnScreen(retry_pic, confidence=0.9)
+        location = pyautogui.locateCenterOnScreen(retry_pic, confidence=0.5)
         pyautogui.moveTo(location)
         pyautogui.click()
         total_games += 1
-        print("total games  :=", total_games)
+        print(datetime.now(), " : retry pressed :=", total_games)
     except pyautogui.ImageNotFoundException:
         location = False
 
@@ -153,13 +155,14 @@ def retry_click():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     print_hi('PyCharm')
+    print("start time ; ", datetime.now())
     #auto()
     #pysimplegui_start()
     #tkinter_start()
     turnon = True
-    target_games = 1
+    target_games = 50
     while total_games < (target_games - 1) :
-        time.sleep(1)
+        time.sleep(0.25)
         #gotit = test_capture()
         #print("gotit :", gotit)
         #if not isinstance(gotit, bool):
@@ -172,9 +175,9 @@ if __name__ == '__main__':
         elite2_click()
         elite_click()
 
-
+    print("last round ; ", datetime.now())
     while turnon:
-        time.sleep(1)
+        time.sleep(0.25)
         click_level()
         confirm_click()
         elite2_click()
