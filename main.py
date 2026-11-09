@@ -160,7 +160,7 @@ if __name__ == '__main__':
     #pysimplegui_start()
     #tkinter_start()
     turnon = True
-    target_games = 50
+    target_games = 75
     while total_games < (target_games - 1) :
         time.sleep(0.25)
         #gotit = test_capture()

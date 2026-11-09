@@ -72,7 +72,7 @@ if __name__ == '__main__':
         time.sleep(0.25)
         click_next()
         click_next2()
-        start_click()
+
 
 
 
